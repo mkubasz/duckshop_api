@@ -1,0 +1,23 @@
+
+BUCKETS ENDPOINTS
+
+GET: /buckets -> result all buckets
+POST: /buckets/create -> result all buckets
+GET: /buckets/:id -> result one bucket
+GET: /buckets/:id/products -> result all product from bucket
+POST: /buckets/:id/products/add -> add new product to bucket
+GET: /buckets/:id/products/:id -> result one product
+GET: /buckets/:id/products/:id/delete -> delete product from bucket
+GET: /buckets/:id/products?order&filter -> result products with some order or filter
+    order : [
+        category: Meat,
+        name: Asc/Desc
+    ]
+    filter : [
+        category,
+        is_bought
+    ]
+GET: /buckets/:id/products/:id/buy -> mark as bought
+GET: /buckets/:id/products/closed -> mark as closed
+POST: /buckets/:id/products/shared -> shared with others
+    body: [:userID]
