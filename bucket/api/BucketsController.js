@@ -1,5 +1,5 @@
 const CreateBucketCommand = require('../application/CreateBucketCommand');
-
+const GetBucketQuery = require('../infrastructure/GetBucketQuery');
 const BucketsController = ({commandBus, queryBus}) => {
     /*
         Bucket Model
@@ -10,7 +10,9 @@ const BucketsController = ({commandBus, queryBus}) => {
      */
     return {
         async get(id) {
-            return repository.get(id);
+            const query = new GetBucketQuery();
+            Object.assign(query, {id: id});
+            return queryBus.handle(query);
         },
         async getAll() {
             return repository.getAll();
