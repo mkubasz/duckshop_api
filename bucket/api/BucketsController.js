@@ -1,4 +1,6 @@
-const BucketsController = (repository) => {
+const CreateBucketCommand = require('../application/CreateBucketCommand');
+
+const BucketsController = ({commandBus, queryBus}) => {
     /*
         Bucket Model
             id: string -- Uuid format
@@ -13,14 +15,14 @@ const BucketsController = (repository) => {
         async getAll() {
             return repository.getAll();
         },
-        async create(bucket) {
-            return repository.create(bucket);
+        async create(bucket: CreateBucketCommand) {
+            commandBus.handle(bucket);
         },
-        async update(bucket) {
-            return repository.update(bucket);
+        async update(bucket: CreateBucketCommand) {
+            commandBus.handle(bucket);
         },
         async delete(bucketID) {
-            return repository.delete(bucketID);
+            commandBus.handle(bucketID);
         },
     };
 };

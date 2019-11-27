@@ -1,7 +1,8 @@
 const restify = require('restify');
 const config = require('./Config');
-const bucketsRepository = require('./bucket/BucketsRepository');
-const bucketsController = require('./bucket/BucketsController');
+const bucketsController = require('./bucket/api/BucketsController');
+const commandBus = require('./application/CommandBus');
+const inMemoryDataProvider = require('./infrastructure/InMemoryDataProvider')();
 
 const server = restify.createServer({
     name: config.name,
@@ -11,13 +12,13 @@ const server = restify.createServer({
 
 /// Buckets Endpoints
 server.get('/bucket/',async (req, res, next) => {
-    const message = await bucketsController(bucketsRepository()).getAll();
+    const message = await bucketsController(commandBus(inMemoryDataProvider)).getAll();
     res.send(message);
     next();
 });
 
 server.get('/bucket/:id',async (req, res, next) => {
-    const message = await bucketsController(bucketsRepository()).get(req.params.id);
+    const message = await bucketsController(commandBus(inMemoryDataProvider)).get(req.params.id);
     res.send(message);
     next();
 });
