@@ -6,12 +6,12 @@ const CommandBus = (dataProvider) => {
         {command: CreateBucketCreate, handler: BucketCommandHandler(dataProvider.buckets)}
     ];
     return {
-        handle(command) {
+        async send(command) {
             const handler = commandsRegister.find(
                 (item) =>
                     command.constructor.name === item.command.name
             );
-            handler.handler.handle(command);
+            await handler.handler.handle(command);
         }
     };
 };

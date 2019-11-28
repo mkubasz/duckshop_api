@@ -3,7 +3,7 @@ const BucketsRepository = require('../infrastructure/BucketsRepository');
 
 const BucketCommandHandler = (dataProvider) => {
     return {
-      handle(command) {
+      async handle(command) {
         if (command instanceof CreateBucketCreate) {
             BucketsRepository(dataProvider).create(command);
         }

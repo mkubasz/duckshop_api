@@ -1,5 +1,7 @@
 const CreateBucketCommand = require('../application/CreateBucketCommand');
 const GetBucketQuery = require('../infrastructure/GetBucketQuery');
+const GetAllBucketsQuery = require('../infrastructure/GetAllBucketsQuery');
+
 const BucketsController = ({commandBus, queryBus}) => {
     /*
         Bucket Model
@@ -12,19 +14,24 @@ const BucketsController = ({commandBus, queryBus}) => {
         async get(id) {
             const query = new GetBucketQuery();
             Object.assign(query, {id: id});
-            return queryBus.handle(query);
+            return queryBus.send(query);
         },
         async getAll() {
-            return repository.getAll();
+            const query = new GetAllBucketsQuery();
+            return queryBus.send(query);
         },
-        async create(bucket: CreateBucketCommand) {
-            commandBus.handle(bucket);
+        async create(bucket) {
+            const command = new CreateBucketCommand();
+            Object.assign(command, bucket);
+            commandBus.send(command);
         },
-        async update(bucket: CreateBucketCommand) {
-            commandBus.handle(bucket);
+        async update(bucket) {
+            const command = new CreateBucketCommand();
+            Object.assign(command, bucket);
+            commandBus.send(command);
         },
         async delete(bucketID) {
-            commandBus.handle(bucketID);
+            commandBus.send(bucketID);
         },
     };
 };
