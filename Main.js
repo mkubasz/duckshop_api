@@ -1,4 +1,7 @@
-const restify = require('restify');
+const fastify = require('fastify')({
+    logger: true
+});
+
 const config = require('./Config');
 const BucketsController = require('./bucket/api/BucketsController');
 const CommandBus = require('./application/CommandBus');
@@ -7,34 +10,25 @@ const fs = require('fs');
 
 const InMemoryDataProvider = require('./infrastructure/InMemoryDataProvider')();
 
-const server = restify.createServer({
-    name: config.name,
-    version: config.version,
-    url: config.hostname
-});
-
-server.get('/', (req, res, next) => {
+fastify.get('/', (request, reply) => {
     const endpoints = fs.readFileSync('endpoints.json');
-    res.send(JSON.parse(endpoints));
-    next();
+    reply.send(JSON.parse(endpoints));
 });
 
 const commandBus = CommandBus(InMemoryDataProvider);
 const queryBus = QueryBus(InMemoryDataProvider);
 
 /// Buckets Endpoints
-server.get('/bucket', async (req, res, next) => {
+fastify.get('/bucket', async (request, reply) => {
     const message = await BucketsController({commandBus, queryBus}).getAll();
-    res.send(message);
-    next();
+    reply.send(message);
 });
 
-server.get('/bucket/:id', async (req, res, next) => {
+fastify.get('/bucket/:id', async (request, reply) => {
     const message = await BucketsController({commandBus, queryBus}).get(req.params.id);
-    res.send(message);
-    next();
+    reply.send(message);
 });
 
-server.listen(config.port, () => {
-    console.log("%s listening at %s", server.name, server.url);
+fastify.listen(config.port, (err, address) => {
+    fastify.log.info(`server listening on ${address}`);
 });
