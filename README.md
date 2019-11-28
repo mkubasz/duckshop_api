@@ -4,9 +4,9 @@ Api for mobile application to control your shop list, bucket and money.
 
 ## How to run
 
-yarn install
+`yarn install`
 
-yarn start
+`yarn start`
 
 ## Endpoints
 ```json
