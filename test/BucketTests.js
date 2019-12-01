@@ -1,4 +1,7 @@
 const assert = require('assert');
+const expect = require('chai').expect;
+const should = require('chai').should();
+
 const CommandBus = require('../application/CommandBus');
 const QueryBus = require('../infrastructure/QueryBus');
 
@@ -81,8 +84,7 @@ describe('Buckets', () => {
 
             mock.__proto__ = UpdateBucketCommand.prototype;
             await commandBus.send(mock);
-
-            assert.equal(inMemoryDataProvider.buckets[0].name, "Default2");
+            inMemoryDataProvider.buckets[0].name.should.equal("Default2");
         });
     });
 });
