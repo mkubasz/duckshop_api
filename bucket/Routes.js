@@ -1,8 +1,12 @@
 const BucketsController = require('./api/BucketsController');
 
-const addBucketRoutes  = ({fastify, commandBus, queryBus}) => {
+const addBucketRoutes  = async ({fastify, commandBus, queryBus}) => {
     /// Buckets Endpoints
     fastify.get('/buckets', async (request, reply) => {
+        const message = await BucketsController({commandBus, queryBus}).getAll();
+        reply.send(message);
+    });
+    fastify.post('/buckets', async (request, reply) => {
         const message = await BucketsController({commandBus, queryBus}).getAll();
         reply.send(message);
     });

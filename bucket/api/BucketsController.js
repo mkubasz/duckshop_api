@@ -28,6 +28,10 @@ const BucketsController = ({commandBus, queryBus}) => {
             bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
             commandBus.send(bucket);
         },
+        async shared(bucketID, userID) {
+            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            commandBus.send(bucket);
+        },
         async delete(bucketID) {
             commandBus.send(bucketID);
         },

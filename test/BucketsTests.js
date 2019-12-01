@@ -39,4 +39,18 @@ describe('Buckets', () => {
             assert.equal(result.id, "generatedID1");
         });
     });
+
+    describe('delete', () => {
+        it('should return first bucket', async () => {
+            const mock = {
+                id: "generatedID1",
+            };
+            queryHandlers.registration(BucketRegistration(InMemoryDataProvider).queryRegister);
+
+            const queryBus = QueryBus(queryHandlers.handlers());
+            mock.__proto__ = GetBucketQuery.prototype;
+            const result = await queryBus.send(mock);
+            assert.equal(result.id, "generatedID1");
+        });
+    });
 });
