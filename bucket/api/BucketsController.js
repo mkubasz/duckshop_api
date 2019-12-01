@@ -1,4 +1,6 @@
 const CreateBucketCommand = require('../application/CreateBucketCommand');
+const UpdateBucketCommand = require('../application/UpdateBucketCommand');
+
 const GetBucketQuery = require('../infrastructure/GetBucketQuery');
 const GetAllBucketsQuery = require('../infrastructure/GetAllBucketsQuery');
 
@@ -25,7 +27,7 @@ const BucketsController = ({commandBus, queryBus}) => {
             commandBus.send(bucket);
         },
         async update(bucket) {
-            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            bucket.__proto__.constructor = UpdateBucketCommand.prototype.constructor;
             commandBus.send(bucket);
         },
         async shared(bucketID, userID) {

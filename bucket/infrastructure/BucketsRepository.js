@@ -18,7 +18,7 @@ const BucketsRepository = (dataProvider) => {
             return bucket;
         },
         delete(bucketID) {
-            return _.remove(dataProvider, el => el.id === bucketID);
+            return _.remove(dataProvider, el => el.id === bucketID.id);
         },
     };
 };
