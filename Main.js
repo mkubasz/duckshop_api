@@ -21,6 +21,14 @@ const ProductRegistration = require('./product/Registration');
 commandHandlers.registration(ProductRegistration(inMemoryDataProvider).commandsRegister);
 queryHandlers.registration(ProductRegistration(inMemoryDataProvider).queryRegister);
 
+const CategoryRegistration = require('./category/Registration');
+commandHandlers.registration(CategoryRegistration(inMemoryDataProvider).commandsRegister);
+queryHandlers.registration(CategoryRegistration(inMemoryDataProvider).queryRegister);
+
+const ClientRegistration = require('./client/Registration');
+commandHandlers.registration(ClientRegistration(inMemoryDataProvider).commandsRegister);
+queryHandlers.registration(ClientRegistration(inMemoryDataProvider).queryRegister);
+
 const commandBus = CommandBus(commandHandlers.handlers());
 const queryBus = QueryBus(queryHandlers.handlers());
 
@@ -34,6 +42,12 @@ addBucketRoutes({fastify, commandBus, queryBus});
 
 const addProductRoutes = require('./product/Routes');
 addProductRoutes({fastify, commandBus, queryBus});
+
+const addCategoryRoutes = require('./category/Routes');
+addCategoryRoutes({fastify, commandBus, queryBus});
+
+const addClientRoutes = require('./client/Routes');
+addClientRoutes({fastify, commandBus, queryBus});
 
 fastify.listen(config.port, (err, address) => {
     fastify.log.info(`server listening on ${address}`);

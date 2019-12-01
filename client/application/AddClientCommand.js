@@ -1,4 +1,4 @@
-class AddProductCommand {
+class AddClientCommand {
     constructor(id, name, description, category, bucketID, image, imageName, number, bought) {
         this.id = id;
         this.bucketID = bucketID;
@@ -11,4 +11,4 @@ class AddProductCommand {
     }
 }
 
-module.exports = AddProductCommand;
+module.exports = AddClientCommand;

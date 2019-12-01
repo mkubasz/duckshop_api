@@ -1,10 +1,10 @@
-const AddProductCommand = require('../application/AddProductCommand');
-const GetProductQuery = require('../infrastructure/GetProductQuery');
-const GetAllProductsQuery = require('../infrastructure/GetAllProductsQuery');
+const AddClientCommand = require('../application/AddClientCommand');
+const GetClientQuery = require('../infrastructure/GetClientQuery');
+const GetAllClientsQuery = require('../infrastructure/GetAllClientsQuery');
 
-const ProductsController = ({commandBus, queryBus}) => {
+const ClientsController = ({commandBus, queryBus}) => {
     /*
-        Product Model
+        Client Model
             id: string -- Uuid format
             name: string -- Label
             description: string -- Created bucket
@@ -16,23 +16,23 @@ const ProductsController = ({commandBus, queryBus}) => {
      */
     return {
         async get(id) {
-            id.__proto__.constructor = GetProductQuery.prototype.constructor;
+            id.__proto__.constructor = GetClientQuery.prototype.constructor;
             return queryBus.send(id);
         },
         async getAll() {
-            const query = new GetAllProductsQuery();
+            const query = new GetAllClientsQuery();
             return queryBus.send(query);
         },
         async add(bucket) {
-            bucket.__proto__.constructor = AddProductCommand.prototype.constructor;
+            bucket.__proto__.constructor = AddClientCommand.prototype.constructor;
             commandBus.send(bucket);
         },
         async save(bucket) {
-            bucket.__proto__.constructor = AddProductCommand.prototype.constructor;
+            bucket.__proto__.constructor = AddClientCommand.prototype.constructor;
             commandBus.send(bucket);
         },
         async buy(bucketID) {
-            bucket.__proto__.constructor = AddProductCommand.prototype.constructor;
+            bucket.__proto__.constructor = AddClientCommand.prototype.constructor;
             commandBus.send(bucket);
         },
         async delete(bucketID) {
@@ -40,4 +40,4 @@ const ProductsController = ({commandBus, queryBus}) => {
         },
     };
 };
-module.exports = ProductsController;
+module.exports = ClientsController;
