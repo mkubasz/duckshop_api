@@ -5,6 +5,9 @@ const QueryBus = require('../infrastructure/QueryBus');
 const CreateBucketCreate = require('../bucket/application/CreateBucketCommand');
 const GetBucketQuery = require('../bucket/infrastructure/GetBucketQuery');
 const InMemoryDataProvider = require('../infrastructure/InMemoryDataProvider')();
+const BucketRegistration = require('../bucket/Registration');
+const commandHandlers = require('../application/Registration')();
+const queryHandlers = require('../application/Registration')();
 
 describe('Buckets', () => {
     describe('create', () => {
@@ -15,7 +18,8 @@ describe('Buckets', () => {
                     created_at: "data",
                     closed_at: "data"
             };
-            const commandBus = CommandBus(InMemoryDataProvider);
+            commandHandlers.registration(BucketRegistration(InMemoryDataProvider).commandsRegister);
+            const commandBus = CommandBus(commandHandlers.handlers());
             const command = new CreateBucketCreate();
             Object.assign(command, mock);
             await commandBus.send(command);
@@ -27,7 +31,9 @@ describe('Buckets', () => {
             const mock = {
                 id: "generatedID1",
             };
-            const queryBus = QueryBus(InMemoryDataProvider);
+            queryHandlers.registration(BucketRegistration(InMemoryDataProvider).queryRegister);
+
+            const queryBus = QueryBus(queryHandlers.handlers());
             const query = new GetBucketQuery();
 
             Object.assign(query, mock);

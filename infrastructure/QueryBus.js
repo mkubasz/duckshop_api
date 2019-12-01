@@ -1,13 +1,5 @@
-const BucketQueryHandler = require('../bucket/infrastructure/BucketQueryHandler');
-const GetBucketQuery = require('../bucket/infrastructure/GetBucketQuery');
-const GetAllBucketsQuery = require('../bucket/infrastructure/GetAllBucketsQuery');
 
-const QueryBus = (dataProvider) => {
-    const queryRegister = [
-        {query: GetBucketQuery, handler: BucketQueryHandler(dataProvider.buckets)},
-        {query: GetAllBucketsQuery, handler: BucketQueryHandler(dataProvider.buckets)}
-
-    ];
+const QueryBus = (queryRegister) => {
     return {
         async send(query) {
             const handler = queryRegister.find(

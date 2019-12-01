@@ -1,10 +1,4 @@
-const CreateBucketCreate = require('../bucket/application/CreateBucketCommand');
-const BucketCommandHandler = require('../bucket/application/BucketCommandHandler');
-
-const CommandBus = (dataProvider) => {
-    const commandsRegister = [
-        {command: CreateBucketCreate, handler: BucketCommandHandler(dataProvider.buckets)}
-    ];
+const CommandBus = (commandsRegister) => {
     return {
         async send(command) {
             const handler = commandsRegister.find(
