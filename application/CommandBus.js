@@ -3,7 +3,7 @@ const CommandBus = (commandsRegister) => {
         async send(command) {
             const handler = commandsRegister.find(
                 (item) =>
-                    command.constructor.name === item.command.name
+                    command.__proto__.constructor.name === item.command.name
             );
             await handler.handler.handle(command);
         }

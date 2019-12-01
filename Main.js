@@ -10,7 +10,7 @@ const QueryBus = require('./infrastructure/QueryBus');
 
 const InMemoryDataProvider = require('./infrastructure/InMemoryDataProvider')();
 
-const BucketRoutes = require('./bucket/Routes');
+const addBucketRoutes = require('./bucket/Routes');
 const BucketRegistration = require('./bucket/Registration');
 
 const commandHandlers = require('./application/Registration')();
@@ -27,7 +27,8 @@ fastify.get('/', (request, reply) => {
     reply.send(JSON.parse(endpoints));
 });
 
-BucketRoutes({fastify, commandBus, queryBus}).add();
+addBucketRoutes({fastify, commandBus, queryBus});
+
 fastify.listen(config.port, (err, address) => {
     fastify.log.info(`server listening on ${address}`);
 });

@@ -2,7 +2,7 @@ const assert = require('assert');
 const CommandBus = require('../application/CommandBus');
 const QueryBus = require('../infrastructure/QueryBus');
 
-const CreateBucketCreate = require('../bucket/application/CreateBucketCommand');
+const CreateBucketCommand = require('../bucket/application/CreateBucketCommand');
 const GetBucketQuery = require('../bucket/infrastructure/GetBucketQuery');
 const InMemoryDataProvider = require('../infrastructure/InMemoryDataProvider')();
 const BucketRegistration = require('../bucket/Registration');
@@ -20,12 +20,12 @@ describe('Buckets', () => {
             };
             commandHandlers.registration(BucketRegistration(InMemoryDataProvider).commandsRegister);
             const commandBus = CommandBus(commandHandlers.handlers());
-            const command = new CreateBucketCreate();
-            Object.assign(command, mock);
-            await commandBus.send(command);
+            mock.__proto__ = CreateBucketCommand.prototype;
+            await commandBus.send(mock);
             assert.equal(InMemoryDataProvider.buckets.length, 2);
         });
     });
+    
     describe('read', () => {
         it('should return first bucket', async () => {
             const mock = {
@@ -34,10 +34,8 @@ describe('Buckets', () => {
             queryHandlers.registration(BucketRegistration(InMemoryDataProvider).queryRegister);
 
             const queryBus = QueryBus(queryHandlers.handlers());
-            const query = new GetBucketQuery();
-
-            Object.assign(query, mock);
-            const result = await queryBus.send(query);
+            mock.__proto__ = GetBucketQuery.prototype;
+            const result = await queryBus.send(mock);
             assert.equal(result.id, "generatedID1");
         });
     });

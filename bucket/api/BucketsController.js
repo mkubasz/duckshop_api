@@ -13,7 +13,7 @@ const BucketsController = ({commandBus, queryBus}) => {
     return {
         async get(id) {
             const query = new GetBucketQuery();
-            Object.assign(query, {id: id});
+            id.__proto__.constructor = GetBucketQuery.prototype.constructor;
             return queryBus.send(query);
         },
         async getAll() {
@@ -21,14 +21,12 @@ const BucketsController = ({commandBus, queryBus}) => {
             return queryBus.send(query);
         },
         async create(bucket) {
-            const command = new CreateBucketCommand();
-            Object.assign(command, bucket);
-            commandBus.send(command);
+            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            commandBus.send(bucket);
         },
         async update(bucket) {
-            const command = new CreateBucketCommand();
-            Object.assign(command, bucket);
-            commandBus.send(command);
+            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            commandBus.send(bucket);
         },
         async delete(bucketID) {
             commandBus.send(bucketID);
