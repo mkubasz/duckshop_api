@@ -8,7 +8,10 @@ const BucketQueryHandler = (dataProvider) => {
             if (query instanceof GetBucketQuery) {
                 return BucketsRepository(dataProvider).get(query.id);
             }
-            if (query instanceof GetAllBucketsQuery) {
+            else if (query instanceof GetAllBucketsQuery) {
+                return BucketsRepository(dataProvider).getAll();
+            }
+            else if (query instanceof GetAllBucketsQuery) {
                 return BucketsRepository(dataProvider).getAll();
             }
         }

@@ -15,7 +15,7 @@ const BucketsController = ({commandBus, queryBus}) => {
     return {
         async get(id) {
             const query = new GetBucketQuery();
-            id.__proto__.constructor = GetBucketQuery.prototype.constructor;
+            query.id = id;
             return queryBus.send(query);
         },
         async getAll() {
@@ -23,15 +23,15 @@ const BucketsController = ({commandBus, queryBus}) => {
             return queryBus.send(query);
         },
         async create(bucket) {
-            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            bucket.__proto__ = CreateBucketCommand.prototype;
             commandBus.send(bucket);
         },
         async update(bucket) {
-            bucket.__proto__.constructor = UpdateBucketCommand.prototype.constructor;
+            bucket.__proto__ = UpdateBucketCommand.prototype;
             commandBus.send(bucket);
         },
         async shared(bucketID, userID) {
-            bucket.__proto__.constructor = CreateBucketCommand.prototype.constructor;
+            bucket.__proto__ = CreateBucketCommand.prototype;
             commandBus.send(bucket);
         },
         async delete(bucketID) {

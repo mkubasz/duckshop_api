@@ -1,6 +1,6 @@
 const AddClientCommand = require('../application/AddClientCommand');
 const GetClientQuery = require('../infrastructure/GetClientQuery');
-const GetAllClientsQuery = require('../infrastructure/GetAllClientsQuery');
+const GetAllClientsQuery = require('../infrastructure/GetAllClientQuery');
 
 const ClientsController = ({commandBus, queryBus}) => {
     /*

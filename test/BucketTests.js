@@ -13,6 +13,7 @@ const UpdateBucketCommand = require('../bucket/application/UpdateBucketCommand')
 const DeleteBucketCommand = require('../bucket/application/DeleteBucketCommand');
 
 const GetBucketQuery = require('../bucket/infrastructure/GetBucketQuery');
+process.env['TEST'] = true;
 
 describe('Buckets', () => {
     describe('create', () => {
@@ -24,9 +25,8 @@ describe('Buckets', () => {
                     closed_at: "data"
             };
             const commandHandlers = require('../application/Registration')();
-
             let inMemoryDataProvider = InMemoryDataProvider();
-            commandHandlers.registration(BucketRegistration(inMemoryDataProvider).commandsRegister);
+            commandHandlers.registration(BucketRegistration(inMemoryDataProvider.buckets).commandsRegister);
             const commandBus = CommandBus(commandHandlers.handlers());
             mock.__proto__ = CreateBucketCommand.prototype;
             await commandBus.send(mock);
@@ -42,7 +42,7 @@ describe('Buckets', () => {
             let inMemoryDataProvider = InMemoryDataProvider();
             const queryHandlers = require('../application/Registration')();
 
-            queryHandlers.registration(BucketRegistration(inMemoryDataProvider).queryRegister);
+            queryHandlers.registration(BucketRegistration(inMemoryDataProvider.buckets).queryRegister);
 
             const queryBus = QueryBus(queryHandlers.handlers());
             mock.__proto__ = GetBucketQuery.prototype;
@@ -60,7 +60,7 @@ describe('Buckets', () => {
             let inMemoryDataProvider = InMemoryDataProvider();
 
             const commandHandlers = require('../application/Registration')();
-            commandHandlers.registration(BucketRegistration(inMemoryDataProvider).commandsRegister);
+            commandHandlers.registration(BucketRegistration(inMemoryDataProvider.buckets).commandsRegister);
             const commandBus = CommandBus(commandHandlers.handlers());
 
             mock.__proto__ = DeleteBucketCommand.prototype;
@@ -79,7 +79,7 @@ describe('Buckets', () => {
             let inMemoryDataProvider = InMemoryDataProvider();
             const commandHandlers = require('../application/Registration')();
 
-            commandHandlers.registration(BucketRegistration(inMemoryDataProvider).commandsRegister);
+            commandHandlers.registration(BucketRegistration(inMemoryDataProvider.buckets).commandsRegister);
             const commandBus = CommandBus(commandHandlers.handlers());
 
             mock.__proto__ = UpdateBucketCommand.prototype;

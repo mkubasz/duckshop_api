@@ -1,5 +1,5 @@
 const AddCategoryCommand = require('./AddCategoryCommand');
-const BucketsRepository = require('../infrastructure/CategorysRepository');
+const BucketsRepository = require('../infrastructure/CategoriesRepository');
 
 const CategoryCommandHandler = (dataProvider) => {
     return {

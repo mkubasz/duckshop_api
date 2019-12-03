@@ -1,6 +1,6 @@
 const ClientsRepository = require('./ClientsRepository');
 const GetClientQuery = require('./GetClientQuery');
-const GetAllClientsQuery = require('./GetAllClientsQuery');
+const GetAllClientsQuery = require('./GetAllClientQuery');
 
 const ClientQueryHandler = (dataProvider) => {
     return {

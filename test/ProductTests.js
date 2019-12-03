@@ -13,6 +13,7 @@ const UpdateBucketCommand = require('../bucket/application/UpdateBucketCommand')
 const DeleteBucketCommand = require('../bucket/application/DeleteBucketCommand');
 
 const GetBucketQuery = require('../bucket/infrastructure/GetBucketQuery');
+process.env['TEST'] = true;
 
 describe('Product', () => {
     describe('create', () => {

@@ -1,14 +1,40 @@
 const _ = require('lodash');
+const bucketSchema = require('./Bucket');
 const BucketsRepository = (dataProvider) => {
     return {
-        get(id) {
-            return dataProvider.find((el) => el.id === id);
+        async get(id) {
+            if(process.env.TEST === "true") {
+                return dataProvider.find((el) => el.id === id);
+            }
+
+            let connection = await dataProvider();
+            let Bucket = await connection.connect('Bucket', bucketSchema);
+            return await Bucket.findOne({bucketID: id}).lean().exec();
         },
-        getAll() {
-            return dataProvider;
+        async getAll() {
+            if(process.env.TEST === "true") {
+                return dataProvider;
+            }
+            let connection = await dataProvider();
+            let Bucket = await connection.connect('Bucket', bucketSchema);
+            return await Bucket.find({}).lean().exec();
         },
-        create(bucket) {
-            return dataProvider.push(bucket);
+        async create(bucket) {
+            if(process.env.TEST === "true") {
+                return dataProvider.push(bucket);
+            }
+
+            let connection = await dataProvider();
+            let Bucket = await connection.connect('Bucket', bucketSchema);
+            let newBucket = new Bucket({
+                bucketID: bucket.id,
+                name: bucket.name
+            });
+            newBucket.save(err => {
+                if (err) console.log("Don't create Bucket");
+                console.log("Create Bucket");
+            });
+            return newBucket;
         },
         update(bucketNew) {
             let bucket = dataProvider.find(el => el.id === bucketNew.id);

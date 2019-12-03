@@ -1,6 +1,6 @@
 const AddCategoryCommand = require('../application/AddCategoryCommand');
 const GetCategoryQuery = require('../infrastructure/GetCategoryQuery');
-const GetAllCategorysQuery = require('../infrastructure/GetAllCategorysQuery');
+const GetAllCategoriesQuery = require('../infrastructure/GetAllCategoriesQuery');
 
 const CategorysController = ({commandBus, queryBus}) => {
     /*
@@ -20,7 +20,7 @@ const CategorysController = ({commandBus, queryBus}) => {
             return queryBus.send(id);
         },
         async getAll() {
-            const query = new GetAllCategorysQuery();
+            const query = new GetAllCategoriesQuery();
             return queryBus.send(query);
         },
         async add(bucket) {

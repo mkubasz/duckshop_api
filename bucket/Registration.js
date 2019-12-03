@@ -12,13 +12,13 @@ const GetAllBucketsQuery = require('./infrastructure/GetAllBucketsQuery');
 const BucketRegistration = (dataProvider) => {
     return {
         commandsRegister: [
-            {command: CreateBucketCommand, handler: BucketCommandHandler(dataProvider.buckets)},
-            {command: UpdateBucketCommand, handler: BucketCommandHandler(dataProvider.buckets)},
-            {command: DeleteBucketCommand, handler: BucketCommandHandler(dataProvider.buckets)}
+            {command: CreateBucketCommand, handler: BucketCommandHandler(dataProvider)},
+            {command: UpdateBucketCommand, handler: BucketCommandHandler(dataProvider)},
+            {command: DeleteBucketCommand, handler: BucketCommandHandler(dataProvider)}
         ],
         queryRegister: [
-            {query: GetBucketQuery, handler: BucketQueryHandler(dataProvider.buckets)},
-            {query: GetAllBucketsQuery, handler: BucketQueryHandler(dataProvider.buckets)}
+            {query: GetBucketQuery, handler: BucketQueryHandler(dataProvider)},
+            {query: GetAllBucketsQuery, handler: BucketQueryHandler(dataProvider)}
 
         ],
     };

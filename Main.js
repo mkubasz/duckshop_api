@@ -8,26 +8,27 @@ const config = require('./Config');
 const CommandBus = require('./application/CommandBus');
 const QueryBus = require('./infrastructure/QueryBus');
 
-const inMemoryDataProvider = require('./infrastructure/InMemoryDataProvider')();
+const dataProvider = require('./infrastructure/MongoDataProvider');
 
 const commandHandlers = require('./application/Registration')();
 const queryHandlers = require('./application/Registration')();
 
 const BucketRegistration = require('./bucket/Registration');
-commandHandlers.registration(BucketRegistration(inMemoryDataProvider).commandsRegister);
-queryHandlers.registration(BucketRegistration(inMemoryDataProvider).queryRegister);
+
+commandHandlers.registration(BucketRegistration(dataProvider).commandsRegister);
+queryHandlers.registration(BucketRegistration(dataProvider).queryRegister);
 
 const ProductRegistration = require('./product/Registration');
-commandHandlers.registration(ProductRegistration(inMemoryDataProvider).commandsRegister);
-queryHandlers.registration(ProductRegistration(inMemoryDataProvider).queryRegister);
+commandHandlers.registration(ProductRegistration(dataProvider).commandsRegister);
+queryHandlers.registration(ProductRegistration(dataProvider).queryRegister);
 
 const CategoryRegistration = require('./category/Registration');
-commandHandlers.registration(CategoryRegistration(inMemoryDataProvider).commandsRegister);
-queryHandlers.registration(CategoryRegistration(inMemoryDataProvider).queryRegister);
+commandHandlers.registration(CategoryRegistration(dataProvider).commandsRegister);
+queryHandlers.registration(CategoryRegistration(dataProvider).queryRegister);
 
 const ClientRegistration = require('./client/Registration');
-commandHandlers.registration(ClientRegistration(inMemoryDataProvider).commandsRegister);
-queryHandlers.registration(ClientRegistration(inMemoryDataProvider).queryRegister);
+commandHandlers.registration(ClientRegistration(dataProvider).commandsRegister);
+queryHandlers.registration(ClientRegistration(dataProvider).queryRegister);
 
 const commandBus = CommandBus(commandHandlers.handlers());
 const queryBus = QueryBus(queryHandlers.handlers());

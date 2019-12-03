@@ -2,7 +2,7 @@ const AddClientCommand = require('./application/AddClientCommand');
 const ClientCommandHandler = require('./application/ClientCommandHandler');
 const ClientQueryHandler = require('./infrastructure/ClientQueryHandler');
 const GetClientQuery = require('./infrastructure/GetClientQuery');
-const GetAllClientsQuery = require('./infrastructure/GetAllClientsQuery');
+const GetAllClientsQuery = require('./infrastructure/GetAllClientQuery');
 
 
 const ClientRegistration = (dataProvider) => {

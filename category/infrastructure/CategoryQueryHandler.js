@@ -1,15 +1,15 @@
-const CategorysRepository = require('./CategorysRepository');
+const CategoriesRepository = require('./CategoriesRepository');
 const GetCategoryQuery = require('./GetCategoryQuery');
-const GetAllCategorysQuery = require('./GetAllCategorysQuery');
+const GetAllCategoriesQuery = require('./GetAllCategoriesQuery');
 
 const CategoryQueryHandler = (dataProvider) => {
     return {
         async handle(query) {
             if (query instanceof GetCategoryQuery) {
-                return CategorysRepository(dataProvider).get(query.id);
+                return CategoriesRepository(dataProvider).get(query.id);
             }
-            if (query instanceof GetAllCategorysQuery) {
-                return CategorysRepository(dataProvider).getAll();
+            if (query instanceof GetAllCategoriesQuery) {
+                return CategoriesRepository(dataProvider).getAll();
             }
         }
     };

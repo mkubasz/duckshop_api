@@ -5,17 +5,15 @@ const DeleteBucketCommand = require('./DeleteBucketCommand');
 
 const BucketCommandHandler = (dataProvider) => {
     return {
-      async handle(command) {
-        if (command instanceof CreateBucketCommand) {
-            BucketsRepository(dataProvider).create(command);
+        async handle(command) {
+            if (command instanceof CreateBucketCommand) {
+                await BucketsRepository(dataProvider).create(command);
+            } else if (command instanceof DeleteBucketCommand) {
+                BucketsRepository(dataProvider).delete(command);
+            } else if (command instanceof UpdateBucketCommand) {
+                BucketsRepository(dataProvider).update(command);
+            }
         }
-      if (command instanceof DeleteBucketCommand) {
-          BucketsRepository(dataProvider).delete(command);
-      }
-          if (command instanceof UpdateBucketCommand) {
-              BucketsRepository(dataProvider).update(command);
-          }
-      }
     };
 };
 
