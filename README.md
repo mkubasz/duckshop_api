@@ -1,6 +1,6 @@
 ### Duck shop API
 
-Api for mobile application to control your shop list, bucket and money.
+Api for mobile application to control your shop list, bucket and money. Used Fastify + CQRS + DDD.
 
 ## How to run
 
