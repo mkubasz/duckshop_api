@@ -26,7 +26,7 @@ const CategoryRegistration = require('./category/Registration');
 commandHandlers.registration(CategoryRegistration(dataProvider).commandsRegister);
 queryHandlers.registration(CategoryRegistration(dataProvider).queryRegister);
 
-const ClientRegistration = require('./client/Registration');
+const ClientRegistration = require('./shopper/Registration');
 commandHandlers.registration(ClientRegistration(dataProvider).commandsRegister);
 queryHandlers.registration(ClientRegistration(dataProvider).queryRegister);
 
@@ -47,7 +47,7 @@ addProductRoutes({fastify, commandBus, queryBus});
 const addCategoryRoutes = require('./category/Routes');
 addCategoryRoutes({fastify, commandBus, queryBus});
 
-const addClientRoutes = require('./client/Routes');
+const addClientRoutes = require('./shopper/Routes');
 addClientRoutes({fastify, commandBus, queryBus});
 
 fastify.listen(config.port, (err, address) => {

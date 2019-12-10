@@ -1,34 +1,41 @@
 const BucketsController = require('./api/BucketsController');
 
-const addBucketRoutes  = async ({fastify, commandBus, queryBus}) => {
+const addBucketRoutes = async ({fastify, commandBus, queryBus}) => {
     /// Buckets Endpoints
     fastify.get('/buckets', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).getAll();
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).getAll()
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.post('/buckets', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).create(request.body);
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).create(request.body)
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.put('/buckets', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).getAll();
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).getAll()
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.delete('/buckets', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).getAll();
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).getAll()
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.get('/buckets/:id', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).get(request.params.id);
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).get(request.params.id)
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.get('/buckets/:id/close', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).get(request.params.id);
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).get(request.params.id)
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
     fastify.get('/buckets/:id/share', async (request, reply) => {
-        const message = await BucketsController({commandBus, queryBus}).get(request.params.id);
-        reply.send(message);
+        BucketsController({commandBus, queryBus}).get(request.params.id)
+            .then((message) => reply.code(200).send(message))
+            .catch((err) => reply.code(404).send(err));
     });
 };
 
