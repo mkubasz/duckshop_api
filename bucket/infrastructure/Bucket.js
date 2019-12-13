@@ -11,7 +11,9 @@ const mongoose = require('mongoose');
 const bucketSchema = new mongoose.Schema({
     bucketID: String,
     name: String,
+    position: Number,
     created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: null },
     closed_at: { type: Date, default: null }
 });
 

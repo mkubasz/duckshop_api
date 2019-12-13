@@ -10,6 +10,7 @@ const BucketsController = ({commandBus, queryBus}) => {
             id: string -- Uuid format
             name: string -- Label
             created_at: data -- Created bucket
+            modified_at: data -- Created bucket
             closed_at: data -- Closed bucket
      */
     return {

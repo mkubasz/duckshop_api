@@ -2,6 +2,7 @@ const BucketsRepository = require('../infrastructure/BucketsRepository');
 const CreateBucketCommand = require('./CreateBucketCommand');
 const UpdateBucketCommand = require('./UpdateBucketCommand');
 const DeleteBucketCommand = require('./DeleteBucketCommand');
+const ChangeStateBucketCommand = require('./ChangeStateBucketCommand');
 
 const BucketCommandHandler = (dataProvider) => {
     return {
@@ -12,6 +13,8 @@ const BucketCommandHandler = (dataProvider) => {
                 BucketsRepository(dataProvider).delete(command);
             } else if (command instanceof UpdateBucketCommand) {
                 BucketsRepository(dataProvider).update(command);
+            } else if (command instanceof ChangeStateBucketCommand) {
+                BucketsRepository(dataProvider).change(command);
             }
         }
     };

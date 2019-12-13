@@ -37,14 +37,30 @@ const BucketsRepository = (dataProvider) => {
             return newBucket;
         },
         update(bucketNew) {
-            let bucket = dataProvider.find(el => el.id === bucketNew.id);
-            bucket.name = bucketNew.name;
-            bucket.closed_at = bucketNew.closed_at;
-            bucket.created_at = bucketNew.created_at;
-            return bucket;
+            if(process.env.TEST === "true") {
+                let bucket = dataProvider.find(el => el.id === bucketNew.id);
+                bucket.name = bucketNew.name;
+                bucket.closed_at = bucketNew.closed_at;
+                bucket.created_at = bucketNew.created_at;
+                return bucket;
+            }
+
         },
         delete(bucketID) {
-            return _.remove(dataProvider, el => el.id === bucketID.id);
+            if(process.env.TEST === "true") {
+                return _.remove(dataProvider, el => el.id === bucketID.id);
+            }
+        },
+        change(bucketID) {
+            if(process.env.TEST === "true") {
+                let bucket = dataProvider.find(el => el.id === bucketID.id);
+                if (bucket["closed_at"] === null) {
+                    bucket["closed_at"] = new Date(Date.now());
+                } else {
+                    bucket["closed_at"] = null;
+                }
+                return bucket;
+            }
         },
     };
 };

@@ -3,7 +3,7 @@ const InMemoryDataProvider = () => {
         id: "generatedID1",
         name: "Default1",
         created_at: "data",
-        closed_at: "data"
+        closed_at: null
     }];
     let product = [];
     return {buckets, product};

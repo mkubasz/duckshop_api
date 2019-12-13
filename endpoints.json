@@ -12,7 +12,8 @@
         {"link":  "/buckets/:id/products/:id/save", "method":  "POST", "description":  "Save product as template"},
         {"link":  "/buckets/:id/products/:id/buy", "method":  "GET", "description":  "Select as bought product"},
         {"link":  "/buckets/:id/close", "method":  "GET", "description":  "Closed bucket/ Archive bucket"},
-        {"link":  "/buckets/:id/share", "method":  "GET", "description":  "Shared bucket with others"}
+        {"link":  "/buckets/:id/share", "method":  "GET", "description":  "Shared bucket with others"},
+        {"link":  "/sync", "method":  "POST", "description":  "Sync data"}
       ]
     }
   }
